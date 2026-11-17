@@ -1,0 +1,47 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    @if (authService.currentUser(); as user) {
+      <!-- Vista cuando el usuario YA inició sesión -->
+      <div class="profile-section">
+        <img
+          [src]="user.photoURL"
+          alt="Foto de perfil"
+          class="avatar"
+          referrerpolicy="no-referrer"
+        />
+        <h2>¡Bienvenido, {{ user.displayName }}!</h2>
+        <p class="email">{{ user.email }}</p>
+        <span class="badge">Autenticado con Google</span>
+        <button class="btn-logout" (click)="cerrarSesion()">Cerrar Sesión</button>
+      </div>
+    } @else {
+      <!-- Vista de Formulario de Login -->
+      <div class="header">
+        <h2>Iniciar Sesión</h2>
+        <p>Accede a tu cuenta para continuar</p>
+      </div>
+
+      <form class="form-group" (submit)="$event.preventDefault()">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="usuario@ejemplo.com" />
+
+        <label>Contraseña</label>
+        <input type="password" placeholder="••••••••" />
+
+        <button type="submit" class="btn-primary">Ingresar</button>
+      </form>
+
+      <div class="divider">
+        <span>o continúa con</span>
+      </div>
+
+      <button type="button" class="btn-google" (click)="iniciarSesionGoogle()">
+        <img
+          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          alt="Google"
+        />
+        Iniciar sesión con Google
+      </button>
+    }
+  </div>
+</div>
